@@ -1,8 +1,12 @@
 import { Text, View, TextInput, Pressable } from "react-native";
 import tw from "twrnc";
-import Layout from './../components/Layout';
+import Layout from "./../components/Layout";
+import auth from "../firebase.init";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const HomeScreen = () => {
+  const [user, loading, error] = useAuthState(auth);
+  console.log(user.email);
   return (
     <Layout>
       <View>
