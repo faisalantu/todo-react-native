@@ -8,7 +8,7 @@ import tw from "twrnc";
 
 const Layout = ({ children }) => {
   return (
-    <View style={tw`p-2`}>
+    <View style={tw`p-2 flex-1`}>
       <View style={styles.statusBarStyle}>
         <StatusBar />
       </View>
