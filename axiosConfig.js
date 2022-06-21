@@ -3,7 +3,7 @@ const baseUrl = "https://neko-todo-asp.herokuapp.com/api";
 const baseUrl2 = "http://10.0.2.2:5000/api";
 
 const instance = axios.create({
-  baseURL: baseUrl2,
+  baseURL: baseUrl,
   headers: {
     "Content-Type": "application/json",
   },
