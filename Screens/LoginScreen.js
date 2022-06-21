@@ -3,7 +3,7 @@ import {
   Text,
   TextInput,
   KeyboardAvoidingView,
-  Pressable,
+  TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import tw from "twrnc";
@@ -12,11 +12,10 @@ import auth from "../firebase.init";
 import {
   useSendPasswordResetEmail,
   useSignInWithEmailAndPassword,
-  useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import axios from "../axiosConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigation } from "@react-navigation/native";
+import { StackActions, useNavigation  } from "@react-navigation/native";
 
 
 const LoginScreen = () => {
@@ -31,9 +30,11 @@ const LoginScreen = () => {
     passwordAuthError,
   ] = useSignInWithEmailAndPassword(auth);
 
+
   useEffect(() => {
     if (user) {
-      navigation.navigate("Home");
+      navigation.dispatch(StackActions.replace('Home'));
+      // navigation.navigate("Home");
     }
   }, [user]);
 
@@ -61,27 +62,34 @@ const LoginScreen = () => {
           }}
         />
         <View style={tw`mt-5 items-center`}>
-          <Pressable
+          <TouchableOpacity
             onPress={handleSignin}
             style={tw`px-3 py-3 rounded-lg flex justify-center w-8/12 items-center bg-gray-700 border my-5`}
           >
             <Text style={tw`text-white font-semibold`}>SIGNIN</Text>
-          </Pressable>
+          </TouchableOpacity>
 
-          <View style={tw` flex-row items-center`}>
+          {/* <View style={tw` flex-row items-center`}>
             <Text>or signin with</Text>
-            <Pressable
+            <TouchableOpacity
+            onPress={()=>{
+              console.log("first")
+              signInWithGoogle()
+            }}
               style={tw`p-3 rounded-full justify-center w-12 h-12 items-center bg-gray-700 ml-5`}
             >
               <Text style={tw`text-white font-semibold`}>G</Text>
-            </Pressable>
-          </View>
+            </TouchableOpacity>
+          </View> */}
 
-          <Pressable
+          <TouchableOpacity
+          onPress={()=>{
+            navigation.navigate("Signup");
+          }}
             style={tw`px-3 py-3 rounded-lg flex justify-center w-8/12 items-center border border-gray-800 mt-5`}
           >
             <Text style={tw`font-semibold`}>REGISTER</Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </View>
     </KeyboardAvoidingView>
